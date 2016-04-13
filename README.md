@@ -2,7 +2,6 @@
 
 ## Tech
 
-- React
 - React Native
 - Redux
 
