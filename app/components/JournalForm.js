@@ -51,7 +51,7 @@ class JournalForm extends Component {
             Cancel
           </Text>
         </TouchableHighlight>
-
+        
       </View>
     )
   }

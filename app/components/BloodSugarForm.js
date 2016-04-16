@@ -7,10 +7,14 @@ import React, {
   View
 } from 'react-native'
 
-class JournalForm extends Component {
+class BloodSugarForm extends Component {
 
   constructor(props, context) {
     super(props, context)
+
+    this.state = {
+      text: ''
+    }
   }
 
   onAddPress() {
@@ -18,22 +22,31 @@ class JournalForm extends Component {
     // this.props.onAdd(this.state.value1)
   }
 
-
-
   render() {
-    console.log(this.props)
+    // console.log(this.state)
     return (
       <View style={styles.container}>
-        <Text>
-          List journal entries
-        </Text>
+
+        <TextInput
+          onChangeText={(text) => this.setState({ text: text }) }
+          style={styles.input}
+        />
 
         <TouchableHighlight
-          onPress={this.props.onAddStarted}
-          style={[styles.button, styles.cancelButton]}
+          onPress={this.onAddPress.bind(this)}
+          style={styles.button}
         >
           <Text style={styles.buttonText}>
             Add
+          </Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          onPress={this.props.onCancel}
+          style={[styles.button, styles.cancelButton]}
+        >
+          <Text style={styles.buttonText}>
+            Cancel
           </Text>
         </TouchableHighlight>
 
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    paddingTop: 30,
+    paddingTop: 150,
     backgroundColor: '#F7F7F7',
   },
   input: {
@@ -78,4 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default JournalForm;
+export default BloodSugarForm;

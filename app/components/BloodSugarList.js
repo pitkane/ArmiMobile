@@ -7,46 +7,42 @@ import React, {
   View
 } from 'react-native'
 
-class BloodPressureForm extends Component {
+
+class BloodSugarList extends Component {
 
   constructor(props, context) {
     super(props, context)
-
-    this.state = {
-      text: ''
-    }
   }
 
   onAddPress() {
-    // dispatch action and act accordingly of result 
+    // dispatch action and act accordingly of result
     // this.props.onAdd(this.state.value1)
   }
 
+  doNotTryThisAtHome(list) {
+    console.log(list)
+    return list.map(item => {
+      return `${item.get('value')} - `
+    })
+  }
+
+
   render() {
-    // console.log(this.state)
+    console.log(this.props)
     return (
       <View style={styles.container}>
+        <Text>
+          List of blood sugar values
+          {this.doNotTryThisAtHome(this.props.list)}
 
-        <TextInput
-          onChangeText={(text) => this.setState({ text: text }) }
-          style={styles.input}
-        />
-
-        <TouchableHighlight
-          onPress={this.onAddPress.bind(this)}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>
-            Add
-          </Text>
-        </TouchableHighlight>
+        </Text>
 
         <TouchableHighlight
-          onPress={this.props.onCancel}
+          onPress={this.props.onAddStarted}
           style={[styles.button, styles.cancelButton]}
         >
           <Text style={styles.buttonText}>
-            Cancel
+            Add
           </Text>
         </TouchableHighlight>
 
@@ -58,8 +54,9 @@ class BloodPressureForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     justifyContent: 'flex-start',
-    paddingTop: 150,
+    paddingTop: 30,
     backgroundColor: '#F7F7F7',
   },
   input: {
@@ -91,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TaskForm;
+export default BloodSugarList;

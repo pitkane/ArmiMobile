@@ -14,7 +14,7 @@ import BloodSugarView from './BloodSugarView'
 import BloodPressureView from './BloodPressureView'
 import NotesView from './NotesView'
 
-const Icon = require('react-native-vector-icons/Ionicons');
+const Icon = require('react-native-vector-icons/Ionicons')
 
 class MainView extends Component {
 
@@ -26,10 +26,10 @@ class MainView extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <TabBarIOS translucent={true} >
+        <TabBarIOS translucent={false} >
           <Icon.TabBarItem
-            iconName='ios-clock-outline'
-            selectedIconName='ios-clock'
+            iconName='ios-calendar-outline'
+            selectedIconName='ios-calendar-outline'
             title='Journal'
             selected={this.props.navigation.currentTab === 'JOURNAL'}
             onPress={() => { this.onChangeTab('JOURNAL') }}>
@@ -37,8 +37,8 @@ class MainView extends Component {
           </Icon.TabBarItem>
 
           <Icon.TabBarItem
-            iconName='ios-location-outline'
-            selectedIconName='ios-location'
+            iconName='thermometer'
+            selectedIconName='thermometer'
             title='Blood Sugar'
             selected={this.props.navigation.currentTab === 'BLOODSUGAR'}
             onPress={() => { this.onChangeTab('BLOODSUGAR') }}>
@@ -46,8 +46,8 @@ class MainView extends Component {
           </Icon.TabBarItem>
 
           <Icon.TabBarItem
-            iconName='ios-flame-outline'
-            selectedIconName='ios-flame'
+            iconName='heart'
+            selectedIconName='heart'
             title='Blood Pressure'
             selected={this.props.navigation.currentTab === 'BLOODPRESSURE'}
             onPress={() => { this.onChangeTab('BLOODPRESSURE') }}>
@@ -55,8 +55,8 @@ class MainView extends Component {
           </Icon.TabBarItem>
 
           <Icon.TabBarItem
-            iconName='stats-bars'
-            selectedIconName='stats-bars'
+            iconName='clipboard'
+            selectedIconName='clipboard'
             title='Notes'
             selected={this.props.navigation.currentTab === 'NOTES'}
             onPress={() => { this.onChangeTab('NOTES') }}>

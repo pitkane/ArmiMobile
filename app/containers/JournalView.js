@@ -8,6 +8,8 @@ import React, {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import * as JournalActions from '../actions/journal';
+
 import JournalForm from '../components/JournalForm'
 import JournalList from '../components/JournalList'
 
@@ -34,6 +36,10 @@ class JournalView extends Component {
     })
   }
 
+  componentDidMount() {
+    this.props.dispatch(JournalActions.fetchJournalList())
+  }
+
 
   renderScene(route, nav) {
     switch (route.name) {
@@ -45,13 +51,14 @@ class JournalView extends Component {
           )
       default:
         return (
-          <JournalList onAddStarted={this.onAddStarted.bind(this)} />
+          <JournalList list={this.props.journal.get('list')} onAddStarted={this.onAddStarted.bind(this)} />
         )
     }
   }
 
 
   render() {
+    // console.log(this.props.journal.get('list'))
     return (
       <Navigator
         style={styles.navigator}
@@ -75,4 +82,9 @@ const styles = StyleSheet.create({
   }
 });
 
-export default JournalView;
+function mapStateToProps(state) {
+  return {
+    journal: state.journal
+  }
+}
+export default connect(mapStateToProps)(JournalView);
