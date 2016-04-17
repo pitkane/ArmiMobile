@@ -13,12 +13,12 @@ export const fetchJournalList = () => {
     const JournalObject = Parse.Object.extend('Journal')
     const query = new Parse.Query(JournalObject)
 
-    query.descending('creationDate').find({
+    return query.descending('creationDate').find({
       success: (result) => {
-        return setTimeout(() => {
+      //  return setTimeout(() => {
         dispatch({ type: JOURNAL_SET_LIST, payload: result })
         dispatch({ type: JOURNAL_SUCCESS })
-        }, 2000)
+      //  }, 2000)
 
       },
       error: (error) => {
@@ -46,5 +46,26 @@ export const addJournalEntry = (text) => {
         dispatch({ type: JOURNAL_FAILURE, payload: error })
       }
     })
+  }
+}
+
+export const removeJournalEntry = (item) => {
+  return (dispatch) => {
+    dispatch({ type: JOURNAL_REQUEST })
+
+    // const JournalObject = Parse.Object.extend('Journal');
+    // const query = new Parse.Query(JournalObject);
+    //
+    // return query.get(post_id)
+    //   .then((post) => {
+    return item.destroy({
+      success: function (removed_post) {
+        dispatch({ type: JOURNAL_SUCCESS })
+      },
+      error: function (removed_post, error) {
+        dispatch({ type: JOURNAL_FAILURE, payload: error })
+      }
+    })
+      // })
   }
 }

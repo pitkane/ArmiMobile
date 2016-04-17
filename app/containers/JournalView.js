@@ -24,8 +24,17 @@ class JournalView extends Component {
   }
 
   onAdd(text) {
-    console.log(this)
+    // console.log(this)
     this.props.dispatch(JournalActions.addJournalEntry(text))
+      .then(() => {
+        this.refreshList()
+        this.navigator.popToTop()
+      })
+  }
+
+  onRemovePress(item) {
+    // console.log(item)
+    this.props.dispatch(JournalActions.removeJournalEntry(item))
       .then(() => {
         this.refreshList()
         this.navigator.popToTop()
@@ -53,6 +62,7 @@ class JournalView extends Component {
             listState={this.props.journal.get('listState')}
             isLoading={this.props.journal.get('isLoading')}
             refreshList={this.refreshList.bind(this)}
+            onRemovePress={this.onRemovePress.bind(this)}
             navigator={navigator}
             route={route}
           />

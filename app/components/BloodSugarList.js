@@ -20,7 +20,7 @@ class BloodSugarList extends Component {
   }
 
   doNotTryThisAtHome(list) {
-    console.log(list)
+    // console.log(list)
     return list.map(item => {
       return `${item.get('value')} - `
     })
@@ -28,7 +28,7 @@ class BloodSugarList extends Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <View style={styles.container}>
         <Text>

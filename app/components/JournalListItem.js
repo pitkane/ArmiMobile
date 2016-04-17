@@ -1,52 +1,61 @@
-import React, {
-  Component,
-  StyleSheet,
-  Text,
-  TextInput,
-  Dimensions,
-  TouchableHighlight,
-  View
-} from 'react-native'
+import React from 'react-native'
 
-class JournalListItem extends Component {
+const {
+  Text,
+  View,
+  TouchableHighlight
+} = React
+import Swipeout from 'react-native-swipeout'
+// import Render from './Render'
+
+class JournalListItem extends React.Component {
 
   constructor(props, context) {
     super(props, context)
   }
 
-
   render() {
+    // console.log(this.props)
+    const swipeoutButtons = [
+      {
+        text: 'Remove',
+        // backgroundColor: '#05A5D1',
+        // underlayColor: '#273539',
+        onPress: () => { this.props.onRemovePress(this.props.item) }
+      }
+    ]
+    // console.log(this.props)
     return (
-      <View style={styles.itemWrapper}>
-        <View style={styles.itemContent}>
+      <View style={styles.container}>
+        <Swipeout
+          backgroundColor='#fff'
+          right={swipeoutButtons}
+        >
+          <View style={styles.textContainer}>
+            <Text>{this.props.item.get('body')}</Text>
 
-          <Text>{this.props.item.get('body')}</Text>
-
-        </View>
+          </View>
+        </Swipeout>
       </View>
     )
   }
+
 }
 
-const styles = StyleSheet.create({
-itemWrapper: {
-  width: Dimensions.get('window').width,
-  backgroundColor: '#f2f2f2',
-  paddingBottom: 10,
-  paddingTop:5,
-},
-itemContent:{
-  flex: 1,
-  elevation: 2,
-  shadowColor: '#000000',
-  shadowOpacity: 0.15,
-  shadowRadius: 1,
-  shadowOffset: {
-    height: 2,
-    width: 0
+
+const styles = React.StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#E7E7E7',
+    // padding: 20,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
   },
-  backgroundColor: '#fff'
-}
-});
+  textContainer: {
+    padding: 20,
+  }
+})
 
-export default JournalListItem;
+export default JournalListItem

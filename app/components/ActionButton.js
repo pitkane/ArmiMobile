@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: Platform.OS === 'ios' ? 37 : 20,
     right: 20,
-    backgroundColor: '#ec449c',
+    backgroundColor: '#05A5D1',
     width: 56,
     height: 56,
     borderRadius: 28,

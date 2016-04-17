@@ -35,7 +35,7 @@ class JournalList extends Component {
 
   componentWillReceiveProps(nextProps) {
     // remember to validate, that this really is "list"
-    console.log(nextProps)
+    // console.log(nextProps)
     const dataSource = this.state.dataSource.cloneWithRows(nextProps.list.toJS())
     this.setState({ dataSource: dataSource })
     // console.log(nextProps)
@@ -50,7 +50,7 @@ class JournalList extends Component {
       colors={[theme.primary]}
       tintColor={theme.primary}
       progressBackgroundColor={theme.light} />;
-    console.log(refreshControl)
+    // console.log(refreshControl)
 
     switch (listState) {
       case 'loading':
@@ -64,7 +64,7 @@ class JournalList extends Component {
             <ListView
               key={this.props.list}
               dataSource={this.state.dataSource}
-              renderRow={item => <JournalListItem item={item} />}
+              renderRow={item => <JournalListItem item={item} onRemovePress={this.props.onRemovePress} />}
               style={[styles.listView]}
             />
           </View>
@@ -104,14 +104,15 @@ class JournalList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F7F7F7',
   },
-  listView: {
-    flex: 1
-  },
+  // listView: {
+  //   flex: 1
+  // },
   actionButtonContent: {
     color: '#fff'
   },
