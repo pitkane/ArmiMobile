@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "release:ios": "node node_modules/react-native/local-cli/cli.js bundle --platform=ios --entry-file=index.ios.js --bundle-output=ios/ArmiMobile/main.jsbundle --dev=false",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
+    "test:watch": "npm run test -- --watch",
+    "eslint": "eslint --ext .js ./app",
+    "jscs": "jscs ./app",
+    "ci": "bash ./tools/ci.sh"
   },
   "dependencies": {
     "immutable": "^3.8.0",

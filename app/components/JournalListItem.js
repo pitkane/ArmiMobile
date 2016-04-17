@@ -28,6 +28,7 @@ class JournalListItem extends React.Component {
     return (
       <View style={styles.container}>
         <Swipeout
+          scroll={event => { this.props.allowScroll(event)}}
           backgroundColor='#fff'
           right={swipeoutButtons}
         >

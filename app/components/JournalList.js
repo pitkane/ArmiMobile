@@ -24,6 +24,7 @@ class JournalList extends Component {
     super(props, context)
 
     this.state = {
+      scrollEnabled: true,
       dataSource: new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     }
   }
@@ -41,6 +42,10 @@ class JournalList extends Component {
     // console.log(nextProps)
   }
 
+  _allowScroll(scrollEnabled) {
+    console.log(scrollEnabled)
+    this.setState({ scrollEnabled: scrollEnabled })
+  }
 
   renderFeed(list, listState) {
 
@@ -62,9 +67,10 @@ class JournalList extends Component {
           <View style={styles.container}>
 
             <ListView
+              scrollEnabled={this.state.scrollEnabled}
               key={this.props.list}
               dataSource={this.state.dataSource}
-              renderRow={item => <JournalListItem item={item} onRemovePress={this.props.onRemovePress} />}
+              renderRow={item => <JournalListItem allowScroll={this._allowScroll.bind(this)} item={item} onRemovePress={this.props.onRemovePress} />}
               style={[styles.listView]}
             />
           </View>
