@@ -21,6 +21,10 @@ const store = createStoreWithMiddleware(reducer);
 
 class RootView extends Component {
 
+  constructor(props, context) {
+    super(props, context)
+  }
+  
   componentWillMount() {
     Parse.initialize('OUbVswqKWRhtAXCcv3oHIF7reRqaGdaqIiIBvCJU', 'yaIYz1z8rrvElPeByLkT1zFJiLarlP95M7k7j8vK');
   }

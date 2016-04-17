@@ -10,6 +10,7 @@ import Immutable from 'immutable'
 
 const defaultState = Immutable.fromJS({
   list: [],
+  isLoading: false,
   listState: 'none',
   error: '',
 })
@@ -27,10 +28,13 @@ export default function event(state = defaultState, action) {
       return state.set('list', Immutable.fromJS(action.payload))
       //  return Object.assign({}, state, { isLoading: true })
     case JOURNAL_REQUEST:
+      state.set('isLoading', true)
       return state.set('listState', 'loading')
     case JOURNAL_SUCCESS:
+      state.set('isLoading', false)
       return state.set('listState', 'ready');
     case JOURNAL_FAILURE:
+      state.set('isLoading', false)
       return state.set('listState', 'failed');
     default:
       return state;

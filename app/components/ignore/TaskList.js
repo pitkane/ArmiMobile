@@ -15,9 +15,7 @@ class TaskList extends Component {
   constructor(props, context) {
     super(props, context)
 
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.state = {
       dataSource: ds.cloneWithRows(props.todos),
     }

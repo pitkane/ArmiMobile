@@ -15,47 +15,57 @@ import JournalList from '../components/JournalList'
 
 class JournalView extends Component {
 
-  // renderScene(route, navigator) {
-  //   if (route.component) {
-  //     const RouteComponent = route.component;
-  //     return <RouteComponent navigator={navigator} route={route} {...this.props} />
-  //   }
-  // }
-
-  onCancel() {
-    this.nav.pop()
+  constructor(props, context) {
+    super(props, context)
   }
 
-  onAdd() {
-    this.nav.pop()
+  componentDidMount() {
+    this.refreshList()
   }
 
-  onAddStarted() {
-    this.nav.push({
-      name: 'JournalForm'
-    })
+  onAdd(text) {
+    console.log(this)
+    this.props.dispatch(JournalActions.addJournalEntry(text))
+      .then(() => {
+        this.refreshList()
+        this.navigator.popToTop()
+      })
   }
 
-  componentDidMount() {
+  refreshList() {
     this.props.dispatch(JournalActions.fetchJournalList())
   }
 
-
-  renderScene(route, nav) {
+  renderScene(route, navigator) {
     switch (route.name) {
       case 'JournalForm':
           return (
             <JournalForm
-              onAdd={this.onAdd.bind(this)} onCancel={this.onCancel.bind(this)}
+              navigator={navigator}
+              route={route}
+              onAdd={this.onAdd.bind(this)}
             />
           )
       default:
         return (
-          <JournalList list={this.props.journal.get('list')} onAddStarted={this.onAddStarted.bind(this)} />
+          <JournalList
+            list={this.props.journal.get('list')}
+            listState={this.props.journal.get('listState')}
+            isLoading={this.props.journal.get('isLoading')}
+            refreshList={this.refreshList.bind(this)}
+            navigator={navigator}
+            route={route}
+          />
         )
     }
   }
 
+  // ALTERNATIVE RENDERSCENE METHOD, uses passProps to pass properties :) Going with above for now
+  // renderScene(route, navigator) {
+  //   let RouteComponent = route.component
+  //   // console.log(navigator)
+  //   return <RouteComponent navigator={navigator} {...route.passProps} />
+  // }
 
   render() {
     // console.log(this.props.journal.get('list'))
@@ -65,8 +75,8 @@ class JournalView extends Component {
         initialRoute={{ name: 'JournalList' }}
         renderScene={this.renderScene.bind(this)}
         configureScene={() => ({ ...Navigator.SceneConfigs.FloatFromRight })}
-        ref={(nav) => {
-          this.nav = nav
+        ref={(navigator) => {
+          this.navigator = navigator
         }}
       />
     )
@@ -74,11 +84,16 @@ class JournalView extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  navigator: {
+    paddingTop: Platform.OS === 'ios' ? 62 : 0,
+    paddingBottom:Platform.OS === 'ios' ? 30 : 0,
+  },
+  navbar: {
+    backgroundColor: '#fff',
+    height: 62,
+    paddingBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 

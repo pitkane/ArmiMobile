@@ -7,6 +7,9 @@ import React, {
 
 class BloodPressureView extends Component {
 
+  constructor(props, context) {
+    super(props, context)
+  }
 
   render() {
     return (

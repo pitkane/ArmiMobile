@@ -14,6 +14,10 @@ import BloodSugarForm from '../components/BloodSugarForm'
 
 class BloodSugarView extends Component {
 
+  constructor(props, context) {
+    super(props, context)
+  }
+  
   onCancel() {
     this.nav.pop()
   }

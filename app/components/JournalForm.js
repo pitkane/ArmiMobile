@@ -6,6 +6,7 @@ import React, {
   TouchableHighlight,
   View
 } from 'react-native'
+import { connect } from 'react-redux'
 
 class JournalForm extends Component {
 
@@ -17,15 +18,16 @@ class JournalForm extends Component {
     }
   }
 
-  onAddPress() {
-    // dispatch action and act accordingly of result
-    // this.props.onAdd(this.state.value1)
+  _onAddPress() {
+    this.props.onAdd(this.state.text)
   }
 
-
+  _onCancelPress() {
+    this.props.navigator.popToTop()
+  }
 
   render() {
-    // console.log(this.state)
+    // console.log(this.props)
     return (
       <View style={styles.container}>
 
@@ -35,7 +37,7 @@ class JournalForm extends Component {
         />
 
         <TouchableHighlight
-          onPress={this.onAddPress.bind(this)}
+          onPress={this._onAddPress.bind(this)}
           style={styles.button}
         >
           <Text style={styles.buttonText}>
@@ -44,14 +46,14 @@ class JournalForm extends Component {
         </TouchableHighlight>
 
         <TouchableHighlight
-          onPress={this.props.onCancel}
+          onPress={this._onCancelPress.bind(this)}
           style={[styles.button, styles.cancelButton]}
         >
           <Text style={styles.buttonText}>
             Cancel
           </Text>
         </TouchableHighlight>
-        
+
       </View>
     )
   }
@@ -93,4 +95,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default JournalForm;
+export default connect()(JournalForm);

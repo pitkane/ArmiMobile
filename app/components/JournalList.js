@@ -3,39 +3,98 @@ import React, {
   StyleSheet,
   Text,
   TextInput,
+  RefreshControl,
+  ListView,
   TouchableHighlight,
   View
 } from 'react-native'
+import { connect } from 'react-redux'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
-class JournalForm extends Component {
+import theme from '../style/theme';
+import * as JournalActions from '../actions/journal';
+
+import JournalForm from './JournalForm'
+import JournalListItem from './JournalListItem'
+import ActionButton from './ActionButton'
+
+class JournalList extends Component {
 
   constructor(props, context) {
     super(props, context)
+
+    this.state = {
+      dataSource: new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+    }
   }
 
-  onAddPress() {
-    // dispatch action and act accordingly of result
-    // this.props.onAdd(this.state.value1)
+  componentDidMount() {
+    // dispatch journal feed update
+    //
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // remember to validate, that this really is "list"
+    console.log(nextProps)
+    const dataSource = this.state.dataSource.cloneWithRows(nextProps.list.toJS())
+    this.setState({ dataSource: dataSource })
+    // console.log(nextProps)
   }
 
 
+  renderFeed(list, listState) {
+
+    const refreshControl = <RefreshControl
+      refreshing={this.props.isLoading}
+      onRefresh={this.props.refreshList}
+      colors={[theme.primary]}
+      tintColor={theme.primary}
+      progressBackgroundColor={theme.light} />;
+    console.log(refreshControl)
+
+    switch (listState) {
+      case 'loading':
+        return <Text>Loading... :)</Text> //<Loading />;
+      case 'failed':
+        return <Text>Failed... :)</Text>
+      default:
+        return (
+          <View style={styles.container}>
+
+            <ListView
+              key={this.props.list}
+              dataSource={this.state.dataSource}
+              renderRow={item => <JournalListItem item={item} />}
+              style={[styles.listView]}
+            />
+          </View>
+        )
+    }
+  }
+
+  onPressAction() {
+    // console.log(this.props)
+    this.props.navigator.push({ name: 'JournalForm' })
+    //   component: JournalForm,
+    //   passProps: {
+    //     dispatch: this.props.dispatch,
+    //     actions: JournalActions
+    //   }
+    // })
+  }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <View style={styles.container}>
-        <Text>
-          List journal entries
-        </Text>
 
-        <TouchableHighlight
-          onPress={this.props.onAddStarted}
-          style={[styles.button, styles.cancelButton]}
-        >
-          <Text style={styles.buttonText}>
-            Add
-          </Text>
-        </TouchableHighlight>
+        {/* <Text>List :) </Text> */}
+
+        {this.renderFeed(this.props.list, this.props.listState)}
+
+        <ActionButton onPress={this.onPressAction.bind(this)}>
+          <Icon name={'add'} size={24} style={styles.actionButtonContent}></Icon>
+        </ActionButton>
 
       </View>
     )
@@ -45,37 +104,24 @@ class JournalForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    paddingTop: 30,
-    backgroundColor: '#F7F7F7',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#D7D7D7',
-    height: 50,
-    marginLeft: 10,
-    marginRight: 10,
-    padding: 15,
-    borderRadius: 3,
-  },
-  button: {
-    height: 45,
-    alignSelf: 'stretch',
-    backgroundColor: '#05A5D1',
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F7F7F7',
   },
-  buttonText: {
-    color: '#FAFAFA',
-    fontSize: 18,
-    fontWeight: '600'
+  listView: {
+    flex: 1
   },
-  cancelButton: {
-    backgroundColor: '#666'
-  }
+  actionButtonContent: {
+    color: '#fff'
+  },
 });
 
-export default JournalForm;
+// function mapStateToProps(state) {
+//   return {
+//     list: state.journal.get('list'),
+//     listState: state.journal.get('listState')
+//   }
+// }
+
+export default JournalList
