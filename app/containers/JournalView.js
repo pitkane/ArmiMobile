@@ -11,6 +11,7 @@ import NavigationBar from 'react-native-navbar';
 import theme from '../style/theme';
 import NavRouteMapper from '../components/common/navbarRouteMapper';
 
+import { Actions as RouterActions } from "react-native-router-flux";
 import * as JournalActions from '../actions/journal';
 
 import JournalForm from '../components/JournalForm'
@@ -26,15 +27,6 @@ class JournalView extends Component {
     this.refreshList()
   }
 
-  onAdd(text) {
-    // console.log(this)
-    this.props.dispatch(JournalActions.addJournalEntry(text))
-      .then(() => {
-        this.refreshList()
-        this.navigator.popToTop()
-      })
-  }
-
   onRemovePress(item) {
     // console.log(item)
     this.props.dispatch(JournalActions.removeJournalEntry(item))
@@ -48,59 +40,38 @@ class JournalView extends Component {
     this.props.dispatch(JournalActions.fetchJournalList())
   }
 
-  renderScene(route, navigator) {
-    switch (route.name) {
-      case 'JournalForm':
-          return (
-            <JournalForm
-              navigator={navigator}
-              route={route}
-              onAdd={this.onAdd.bind(this)}
-            />
-          )
-      default:
-        return (
-          <JournalList
-            title="test :)"
-            list={this.props.journal.get('list')}
-            listState={this.props.journal.get('listState')}
-            isLoading={this.props.journal.get('isLoading')}
-            refreshList={this.refreshList.bind(this)}
-            onRemovePress={this.onRemovePress.bind(this)}
-            navigator={navigator}
-            route={route}
-          />
-        )
-    }
+  renderJournalForm() {
+    return (
+      <JournalForm />
+    )
   }
 
-  // ALTERNATIVE RENDERSCENE METHOD, uses passProps to pass properties :) Going with above for now
-  // renderScene(route, navigator) {
-  //   let RouteComponent = route.component
-  //   // console.log(navigator)
-  //   return <RouteComponent navigator={navigator} {...route.passProps} />
-  // }
+  _onAddStart() {
+    RouterActions.journalform()
+    // RouterActions.journalform({ rightTitle: 'WTF', onRight: () => {console.log(this)} })
+  }
+
+  renderJournalList() {
+    return (
+      <JournalList
+        list={this.props.journal.get('list')}
+        listState={this.props.journal.get('listState')}
+        isLoading={this.props.journal.get('isLoading')}
+        onAddStart={this._onAddStart.bind(this)}
+        refreshList={this.refreshList.bind(this)}
+        onRemovePress={this.onRemovePress.bind(this)}
+
+      />
+    )
+  }
 
   render() {
 
     switch (this.props.name) {
           case 'journalform':
-              return (
-                <JournalForm
-                  onAdd={this.onAdd.bind(this)}
-                />
-              )
+              return this.renderJournalForm()
           default:
-            return (
-              <JournalList
-                list={this.props.journal.get('list')}
-                listState={this.props.journal.get('listState')}
-                isLoading={this.props.journal.get('isLoading')}
-                refreshList={this.refreshList.bind(this)}
-                onRemovePress={this.onRemovePress.bind(this)}
-
-              />
-            )
+            return this.renderJournalList()
         }
   }
 }

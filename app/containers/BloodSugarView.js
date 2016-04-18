@@ -17,7 +17,7 @@ class BloodSugarView extends Component {
   constructor(props, context) {
     super(props, context)
   }
-  
+
   onCancel() {
     this.nav.pop()
   }
@@ -33,7 +33,7 @@ class BloodSugarView extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(BloodSugarActions.fetchBloodSugarList())
+    // this.props.dispatch(BloodSugarActions.fetchBloodSugarList())
   }
 
 

@@ -1,4 +1,4 @@
-import React, { AppRegistry, Navigator, StyleSheet, Text, View } from 'react-native'
+import React, { AppRegistry, Navigator, StyleSheet, Text, View, Platform } from 'react-native'
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
@@ -34,17 +34,18 @@ const reducerCreate = params=>{
 export default class Routes extends React.Component {
 
   render() {
+
     return (
 
       <Router createReducer={reducerCreate}>
         <Scene key="modal" component={Modal} >
           <Scene key="root">
 
-            <Scene key="tabbar" hideNavBar={true} tabs={true} >
+            <Scene key="tabbar" hideNavBar={true} tabs={true} tabBarStyle={{'backgroundColor': '#efeff2'}} >
 
               <Scene key="journal" title="Tab #1" icon={TabIcon} >
                 <Scene key="journallist" initial={true} component={JournalView} title="Tab #1_1" />
-                <Scene key="journalform" hideTabBar={true} component={JournalView} title="Tab #1_2" />
+                <Scene key="journalform" hideTabBar={true} component={JournalForm} title="Tab #1_2" />
               </Scene>
 
               <Scene key="bloodsugar" component={BloodSugarView} icon={TabIcon} title="Blood sugar" />
@@ -66,6 +67,10 @@ export default class Routes extends React.Component {
 export default connect()(Routes);
 
 const styles = StyleSheet.create({
+  journalStyle: {
+    paddingTop: Platform.OS === 'ios' ? 62 : 0,
+//    paddingBottom:Platform.OS === 'ios' ? 30 : 0,
+  },
   titleStyle: {
     color: 'white'
   },

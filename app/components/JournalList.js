@@ -3,6 +3,7 @@ import React, {
   StyleSheet,
   Text,
   TextInput,
+  Platform,
   RefreshControl,
   ListView,
   TouchableHighlight,
@@ -44,7 +45,7 @@ class JournalList extends Component {
   }
 
   _allowScroll(scrollEnabled) {
-    console.log(scrollEnabled)
+    // console.log(scrollEnabled)
     this.setState({ scrollEnabled: scrollEnabled })
   }
 
@@ -79,20 +80,13 @@ class JournalList extends Component {
     }
   }
 
-  onPressAction() {
-    // console.log(this.props)
-    JournalActions.journalform()
-    // this.props.navigator.push({ name: 'JournalForm', title: 'jorma' })
-    //   component: JournalForm,
-    //   passProps: {
-    //     dispatch: this.props.dispatch,
-    //     actions: JournalActions
-    //   }
-    // })
+  lol() {
+    console.log('moro')
   }
 
+
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     return (
       <View style={styles.container}>
 
@@ -100,7 +94,7 @@ class JournalList extends Component {
 
         {this.renderFeed(this.props.list, this.props.listState)}
 
-        <ActionButton onPress={() => RouterActions.journalform()}>
+        <ActionButton onPress={this.props.onAddStart}>
           <Icon name={'add'} size={24} style={styles.actionButtonContent}></Icon>
         </ActionButton>
 
@@ -112,6 +106,7 @@ class JournalList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 31 : 0,
     justifyContent: 'flex-start',
     // flexDirection: 'column',
     // justifyContent: 'center',
