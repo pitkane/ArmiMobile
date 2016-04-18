@@ -80,7 +80,7 @@ class JournalList extends Component {
 
   onPressAction() {
     // console.log(this.props)
-    this.props.navigator.push({ name: 'JournalForm' })
+    this.props.navigator.push({ name: 'JournalForm', title: 'jorma' })
     //   component: JournalForm,
     //   passProps: {
     //     dispatch: this.props.dispatch,

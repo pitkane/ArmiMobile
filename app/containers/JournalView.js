@@ -7,6 +7,9 @@ import React, {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
+import NavigationBar from 'react-native-navbar';
+import theme from '../style/theme';
+import NavRouteMapper from '../components/common/navbarRouteMapper';
 
 import * as JournalActions from '../actions/journal';
 
@@ -58,6 +61,7 @@ class JournalView extends Component {
       default:
         return (
           <JournalList
+            title="test :)"
             list={this.props.journal.get('list')}
             listState={this.props.journal.get('listState')}
             isLoading={this.props.journal.get('isLoading')}
@@ -78,13 +82,23 @@ class JournalView extends Component {
   // }
 
   render() {
+    var titleConfig = {
+      title: 'ArmiMobile',
+    }
+
     // console.log(this.props.journal.get('list'))
     return (
+
       <Navigator
         style={styles.navigator}
         initialRoute={{ name: 'JournalList' }}
         renderScene={this.renderScene.bind(this)}
         configureScene={() => ({ ...Navigator.SceneConfigs.FloatFromRight })}
+        navigationBar={
+          <Navigator.NavigationBar
+            style={styles.navbar}
+            routeMapper={NavRouteMapper} />
+        }
         ref={(navigator) => {
           this.navigator = navigator
         }}
@@ -94,12 +108,8 @@ class JournalView extends Component {
 }
 
 const styles = StyleSheet.create({
-  navigator: {
-    paddingTop: Platform.OS === 'ios' ? 62 : 0,
-    paddingBottom:Platform.OS === 'ios' ? 30 : 0,
-  },
   navbar: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     height: 62,
     paddingBottom: 5,
     flexDirection: 'row',

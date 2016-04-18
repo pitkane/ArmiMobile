@@ -32,6 +32,8 @@ class ActionButton extends Component {
   }
 }
 
+const {height, width} = Dimensions.get('window')
+
 const styles = StyleSheet.create({
   button: {
     flexDirection: 'column',
@@ -39,8 +41,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 37 : 20,
-    right: 20,
+    bottom: Platform.OS === 'ios' ? 55 : 20,
+    right: width/2-28,
     backgroundColor: '#05A5D1',
     width: 56,
     height: 56,
