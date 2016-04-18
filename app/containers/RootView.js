@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
+import Routes from '../components/Routes'
 import MainView from './MainView'
 
 import * as reducers from '../reducers';
@@ -24,7 +25,7 @@ class RootView extends Component {
   constructor(props, context) {
     super(props, context)
   }
-  
+
   componentWillMount() {
     Parse.initialize('OUbVswqKWRhtAXCcv3oHIF7reRqaGdaqIiIBvCJU', 'yaIYz1z8rrvElPeByLkT1zFJiLarlP95M7k7j8vK');
   }
@@ -32,7 +33,7 @@ class RootView extends Component {
   render() {
     return (
       <Provider store={store}>
-        <MainView />
+        <Routes />
       </Provider>
     );
   }

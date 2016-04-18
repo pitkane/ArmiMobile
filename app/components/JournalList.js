@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import theme from '../style/theme';
+import { Actions as RouterActions } from "react-native-router-flux";
 import * as JournalActions from '../actions/journal';
 
 import JournalForm from './JournalForm'
@@ -80,7 +81,8 @@ class JournalList extends Component {
 
   onPressAction() {
     // console.log(this.props)
-    this.props.navigator.push({ name: 'JournalForm', title: 'jorma' })
+    JournalActions.journalform()
+    // this.props.navigator.push({ name: 'JournalForm', title: 'jorma' })
     //   component: JournalForm,
     //   passProps: {
     //     dispatch: this.props.dispatch,
@@ -98,7 +100,7 @@ class JournalList extends Component {
 
         {this.renderFeed(this.props.list, this.props.listState)}
 
-        <ActionButton onPress={this.onPressAction.bind(this)}>
+        <ActionButton onPress={() => RouterActions.journalform()}>
           <Icon name={'add'} size={24} style={styles.actionButtonContent}></Icon>
         </ActionButton>
 

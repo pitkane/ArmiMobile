@@ -82,28 +82,26 @@ class JournalView extends Component {
   // }
 
   render() {
-    var titleConfig = {
-      title: 'ArmiMobile',
-    }
 
-    // console.log(this.props.journal.get('list'))
-    return (
+    switch (this.props.name) {
+          case 'journalform':
+              return (
+                <JournalForm
+                  onAdd={this.onAdd.bind(this)}
+                />
+              )
+          default:
+            return (
+              <JournalList
+                list={this.props.journal.get('list')}
+                listState={this.props.journal.get('listState')}
+                isLoading={this.props.journal.get('isLoading')}
+                refreshList={this.refreshList.bind(this)}
+                onRemovePress={this.onRemovePress.bind(this)}
 
-      <Navigator
-        style={styles.navigator}
-        initialRoute={{ name: 'JournalList' }}
-        renderScene={this.renderScene.bind(this)}
-        configureScene={() => ({ ...Navigator.SceneConfigs.FloatFromRight })}
-        navigationBar={
-          <Navigator.NavigationBar
-            style={styles.navbar}
-            routeMapper={NavRouteMapper} />
+              />
+            )
         }
-        ref={(navigator) => {
-          this.navigator = navigator
-        }}
-      />
-    )
   }
 }
 

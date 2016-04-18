@@ -2,6 +2,7 @@ import React, { AppRegistry, Navigator, StyleSheet, Text, View } from 'react-nat
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
+import NavigationDrawer from './common/NavigationDrawer'
 import JournalView from '../containers/JournalView'
 import NotesView from '../containers/NotesView'
 import BloodSugarView from '../containers/BloodSugarView'
@@ -39,11 +40,11 @@ export default class Routes extends React.Component {
         <Scene key="modal" component={Modal} >
           <Scene key="root">
 
-            <Scene key="tabbar" tabs={true}>
+            <Scene key="tabbar" hideNavBar={true} tabs={true} >
 
               <Scene key="journal" title="Tab #1" icon={TabIcon} >
                 <Scene key="journallist" initial={true} component={JournalView} title="Tab #1_1" />
-                <Scene key="journalform" onLeft={()=>alert("Left button!")} leftTitle="Left" hideTabBar={true} component={JournalView} title="Tab #1_2" />
+                <Scene key="journalform" hideTabBar={true} component={JournalView} title="Tab #1_2" />
               </Scene>
 
               <Scene key="bloodsugar" component={BloodSugarView} icon={TabIcon} title="Blood sugar" />

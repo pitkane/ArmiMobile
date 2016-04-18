@@ -7,6 +7,7 @@ import React, {
   View
 } from 'react-native'
 import { connect } from 'react-redux'
+import { Actions as RouterActions } from "react-native-router-flux";
 
 class JournalForm extends Component {
 
@@ -23,7 +24,8 @@ class JournalForm extends Component {
   }
 
   _onCancelPress() {
-    this.props.navigator.popToTop()
+    RouterActions.pop()
+    // this.props.navigator.popToTop()
   }
 
   render() {
