@@ -46,6 +46,7 @@ class JournalList extends Component {
 
   _allowScroll(scrollEnabled) {
     // console.log(scrollEnabled)
+    console.log('scroll')
     this.setState({ scrollEnabled: scrollEnabled })
   }
 
@@ -80,13 +81,16 @@ class JournalList extends Component {
     }
   }
 
-  lol() {
-    console.log('moro')
-  }
-
+  // <ListView
+  //   scrollEnabled={this.state.scrollEnabled}
+  //   key={this.props.list}
+  //   dataSource={this.state.dataSource}
+  //   renderRow={item => <JournalListItem allowScroll={this._allowScroll.bind(this)} item={item} onRemovePress={this.props.onRemovePress} />}
+  //   style={[styles.listView]}
+  // />
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <View style={styles.container}>
 

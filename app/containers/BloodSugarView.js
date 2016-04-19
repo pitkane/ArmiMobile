@@ -33,7 +33,7 @@ class BloodSugarView extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch(BloodSugarActions.fetchBloodSugarList())
+    this.props.dispatch(BloodSugarActions.fetchBloodSugarList())
   }
 
 

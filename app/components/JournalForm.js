@@ -36,12 +36,8 @@ class JournalForm extends Component {
     // this.props.navigator.popToTop()
   }
 
-  onRight() {
-    console.log("morrorooror")
-  }
-
   render() {
-    console.log(this)
+    // console.log(this)
     return (
       <View style={styles.container}>
 

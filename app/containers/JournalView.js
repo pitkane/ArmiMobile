@@ -32,7 +32,7 @@ class JournalView extends Component {
     this.props.dispatch(JournalActions.removeJournalEntry(item))
       .then(() => {
         this.refreshList()
-        this.navigator.popToTop()
+        // this.navigator.popToTop()
       })
   }
 
