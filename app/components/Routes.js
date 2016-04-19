@@ -18,7 +18,7 @@ class TabIcon extends Component {
   }
 
   render() {
-    console.log(this)
+    // console.log(this)
     return (
       <View style={iconStyles.container}>
         <Icon name='ios-clock-outline' size={28} style={iconStyles.icon} />
@@ -68,9 +68,9 @@ export default class Routes extends React.Component {
               <Scene
                 key="journal"
                 title="Journal"
+                icon={TabIcon}
                 iconName="ios-calendar-outline"
-                icon={TabIcon.bind(this)}
-                style={styles.journalScene}
+                style={styles.tabBarScene}
               >
                 <Scene key="journallist" initial={true} component={JournalView} title="Tab #1_1" />
                 <Scene key="journalform" hideTabBar={true} component={JournalForm} title="Tab #1_2" />
@@ -78,26 +78,30 @@ export default class Routes extends React.Component {
 
               <Scene
                 key="bloodsugar"
-                component={BloodSugarView}
                 title="Blood sugar"
+                component={BloodSugarView}
+                icon={TabIcon}
                 iconName="thermometer"
-                icon={TabIcon.bind(this)}
+                style={styles.tabBarScene}
               />
 
               <Scene
                 key="bloodpressure"
+                title="Blood pressure"
                 component={BloodPressureView}
-                icon={TabIcon.bind(this)}
+                icon={TabIcon}
                 iconName="heart"
-                title="Blood pressure" /
-              >
+                style={styles.tabBarScene}
 
-                <Scene
-                  key="notes"
-                  component={NotesView}
-                  icon={TabIcon.bind(this)}
-                  iconName="clipboard"
+              />
+
+              <Scene
+                key="notes"
                 title="Notes"
+                component={NotesView}
+                icon={TabIcon}
+                iconName="clipboard"
+                style={styles.tabBarScene}
               />
 
             </Scene>
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
     borderTopColor: 'rgba(0,0,0,.1)',
     backgroundColor: '#efeff2',
   },
-  journalScene: {
+  tabBarScene: {
     paddingTop: Platform.OS === 'ios' ? 62 : 0,
     paddingBottom: Platform.OS === 'ios' ? 50 : 0,
   },
