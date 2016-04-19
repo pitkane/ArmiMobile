@@ -40,15 +40,16 @@ class JournalView extends Component {
     this.props.dispatch(JournalActions.fetchJournalList())
   }
 
-  renderJournalForm() {
-    return (
-      <JournalForm />
-    )
-  }
 
   _onAddStart() {
     RouterActions.journalform()
     // RouterActions.journalform({ rightTitle: 'WTF', onRight: () => {console.log(this)} })
+  }
+
+  renderJournalForm() {
+    return (
+      <JournalForm />
+    )
   }
 
   renderJournalList() {
@@ -77,13 +78,7 @@ class JournalView extends Component {
 }
 
 const styles = StyleSheet.create({
-  navbar: {
-    backgroundColor: 'white',
-    height: 62,
-    paddingBottom: 5,
-    flexDirection: 'row',
-    alignItems: 'center'
-  }
+
 });
 
 function mapStateToProps(state) {

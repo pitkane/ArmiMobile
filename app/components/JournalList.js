@@ -110,7 +110,8 @@ class JournalList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 31 : 0,
+    // paddingTop: Platform.OS === 'ios' ? 31 : 0,
+    // paddingBottom:Platform.OS === 'ios' ? 26 : 0,
     justifyContent: 'flex-start',
     // flexDirection: 'column',
     // justifyContent: 'center',

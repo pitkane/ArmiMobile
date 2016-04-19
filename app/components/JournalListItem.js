@@ -7,20 +7,6 @@ const {
   View,
   TouchableHighlight
 } = React
-// import Swipeout from 'react-native-swipeout'
-// import Render from './Render'
-
-var SECTIONS = [
-  {
-    title: 'First',
-    content: 'Lorem ipsum...',
-  },
-  {
-    title: 'Second',
-    content: 'Lorem ipsum...',
-  }
-];
-
 
 class JournalListItem extends React.Component {
 
@@ -36,7 +22,7 @@ class JournalListItem extends React.Component {
   _renderHeader(section) {
     return (
       <View style={styles.textContainer}>
-        <Text>{section.title}</Text>
+        <Text>{section.item.get('body')}</Text>
       </View>
     );
   }
@@ -61,9 +47,10 @@ class JournalListItem extends React.Component {
       <View style={styles.container}>
 
         <Accordion
-          sections={[{ title: this.props.item.get('body'), content: 'Remove' }]}
+          sections={[{ item: this.props.item }]}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent.bind(this)}
+          underlayColor='#efeff2'
         />
         {/* <View style={styles.textContainer}>
           <Text>{this.props.item.get('body')}</Text>

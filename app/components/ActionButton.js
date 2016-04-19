@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 55 : 20,
+    bottom: Platform.OS === 'ios' ? 10 : 20,
     right: width/2-28,
     backgroundColor: '#05A5D1',
     width: 56,
