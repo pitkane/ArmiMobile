@@ -8,6 +8,7 @@ import React, {
   TouchableHighlight,
   View
 } from 'react-native'
+import theme from '../style/theme';
 
 class ActionButton extends Component {
 
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: Platform.OS === 'ios' ? 10 : 20,
     right: width/2-28,
-    backgroundColor: '#05A5D1',
+    backgroundColor: theme.primaryTest,
     width: 56,
     height: 56,
     borderRadius: 28,

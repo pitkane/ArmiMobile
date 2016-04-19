@@ -11,6 +11,8 @@ import JournalForm from './JournalForm'
 
 const Icon = require('react-native-vector-icons/Ionicons')
 
+import theme from '../style/theme';
+
 class TabIcon extends Component {
 
   constructor(props) {
@@ -21,8 +23,8 @@ class TabIcon extends Component {
     // console.log(this)
     return (
       <View style={iconStyles.container}>
-        <Icon name='ios-clock-outline' size={28} style={iconStyles.icon} />
-        <Text style={[iconStyles.iconText, {color: this.props.selected ? "red" :"black"}]}>{this.props.title}</Text>
+        <Icon name={this.props.iconName} size={28} style={iconStyles.icon} />
+        <Text style={[iconStyles.iconText, {color: this.props.selected ? theme.primaryTest :"black"}]}>{this.props.title}</Text>
       </View>
     );
   }
