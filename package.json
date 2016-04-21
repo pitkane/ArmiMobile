@@ -12,6 +12,7 @@
     "ci": "bash ./tools/ci.sh"
   },
   "dependencies": {
+    "firebase": "^2.4.2",
     "immutable": "^3.8.0",
     "lodash": "^4.11.1",
     "minutes-seconds-milliseconds": "^1.0.3",

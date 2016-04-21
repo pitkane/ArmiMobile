@@ -11,11 +11,12 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import Parse from 'parse/react-native'
 
 import theme from '../style/theme';
 import { Actions as RouterActions } from "react-native-router-flux";
 import * as JournalActions from '../actions/journal';
-
+import './UserAgent'
 import JournalForm from './JournalForm'
 import JournalListItem from './JournalListItem'
 import ActionButton from './ActionButton'
@@ -32,6 +33,23 @@ class JournalList extends Component {
   }
 
   componentDidMount() {
+    const JournalObject = Parse.Object.extend('Journal')
+    const query = new Parse.Query(JournalObject)
+
+    // Enable Parse LiveQuery for Journal objects
+    const subscription = query.subscribe()
+    console.log('subscription created')
+    console.log(subscription)
+    subscription.on('create', (item) => {
+      // console.log(item.get('body'));
+      console.log('dispatch refresh for journal')
+      this.props.refreshList()
+    });
+    subscription.on('delete', (item) => {
+      // console.log(item.get('body'));
+      console.log('dispatch refresh for journal')
+      this.props.refreshList()
+    });
   }
 
   componentWillReceiveProps(nextProps) {

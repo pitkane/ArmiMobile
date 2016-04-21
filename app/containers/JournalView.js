@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import NavigationBar from 'react-native-navbar';
 import theme from '../style/theme';
 import NavRouteMapper from '../components/common/navbarRouteMapper';
+import Parse from 'parse/react-native'
 
 import { Actions as RouterActions } from "react-native-router-flux";
 import * as JournalActions from '../actions/journal';

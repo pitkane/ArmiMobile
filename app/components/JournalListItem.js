@@ -31,10 +31,10 @@ class JournalListItem extends React.Component {
   _renderContent(section) {
     return (
       <View>
-        <TouchableHighlight onPress={() => this.props.onRemovePress(this.props.item)}>
+        <TouchableHighlight style={styles.removeButton} onPress={() => this.props.onRemovePress(this.props.item)}>
           <Text>Remove</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => console.log('edit')}>
+        <TouchableHighlight style={styles.editButton} onPress={() => console.log('edit')}>
           <Text>Edit</Text>
         </TouchableHighlight>
       </View>
@@ -83,6 +83,12 @@ const styles = React.StyleSheet.create({
     marginRight: 0,
   },
   textContainer: {
+    padding: 20,
+  },
+  removeButton: {
+    padding: 20,
+  },
+  editButton: {
     padding: 20,
   }
 })

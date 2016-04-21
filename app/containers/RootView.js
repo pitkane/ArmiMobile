@@ -19,6 +19,8 @@ const createStoreWithMiddleware = applyMiddleware.apply(thunk, middlewares)(crea
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
+import { appId, javascriptKey, parseURL } from '../../config_secrets.js'
+
 
 class RootView extends Component {
 
@@ -27,7 +29,9 @@ class RootView extends Component {
   }
 
   componentWillMount() {
-    Parse.initialize('OUbVswqKWRhtAXCcv3oHIF7reRqaGdaqIiIBvCJU', 'yaIYz1z8rrvElPeByLkT1zFJiLarlP95M7k7j8vK');
+    Parse.initialize(appId, javascriptKey);
+    Parse.serverURL = parseURL
+    console.log('Parse initialized')
   }
 
   render() {
