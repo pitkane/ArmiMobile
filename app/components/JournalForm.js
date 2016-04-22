@@ -51,7 +51,7 @@ class JournalForm extends Component {
           style={styles.button}
         >
           <Text style={styles.buttonText}>
-            Add
+            Lisää
           </Text>
         </TouchableHighlight>
 
@@ -60,7 +60,7 @@ class JournalForm extends Component {
           style={[styles.button, styles.cancelButton]}
         >
           <Text style={styles.buttonText}>
-            Cancel
+            Poista
           </Text>
         </TouchableHighlight>
 

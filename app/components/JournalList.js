@@ -33,23 +33,13 @@ class JournalList extends Component {
   }
 
   componentDidMount() {
-    const JournalObject = Parse.Object.extend('Journal')
-    const query = new Parse.Query(JournalObject)
 
-    // Enable Parse LiveQuery for Journal objects
+    // Enable LiveQuery
+    const query = new Parse.Query('Journal')
     const subscription = query.subscribe()
-    console.log('subscription created')
-    console.log(subscription)
-    subscription.on('create', (item) => {
-      // console.log(item.get('body'));
-      console.log('dispatch refresh for journal')
-      this.props.refreshList()
-    });
-    subscription.on('delete', (item) => {
-      // console.log(item.get('body'));
-      console.log('dispatch refresh for journal')
-      this.props.refreshList()
-    });
+    subscription.on('create', (item) => { this.props.refreshList() });
+    subscription.on('delete', (item) => { this.props.refreshList() });
+    subscription.on('update', (item) => { this.props.refreshList() });
   }
 
   componentWillReceiveProps(nextProps) {

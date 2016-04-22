@@ -74,8 +74,8 @@ export default class Routes extends React.Component {
                 iconName="ios-calendar-outline"
                 style={styles.tabBarScene}
               >
-                <Scene key="journallist" initial={true} component={JournalView} title="Tab #1_1" />
-                <Scene key="journalform" hideTabBar={true} component={JournalForm} title="Tab #1_2" />
+                <Scene key="journallist" initial={true} component={JournalView} title="Päivyri" />
+                <Scene key="journalform" hideTabBar={true} component={JournalForm} title="Lisää uusi merkintä" />
               </Scene>
 
               <Scene

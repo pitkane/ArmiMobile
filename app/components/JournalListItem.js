@@ -32,10 +32,10 @@ class JournalListItem extends React.Component {
     return (
       <View>
         <TouchableHighlight style={styles.removeButton} onPress={() => this.props.onRemovePress(this.props.item)}>
-          <Text>Remove</Text>
+          <Text>Poista</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.editButton} onPress={() => console.log('edit')}>
-          <Text>Edit</Text>
+          <Text>Editoi</Text>
         </TouchableHighlight>
       </View>
     );
